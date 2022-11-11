@@ -6,7 +6,8 @@ COPY google-cloud-sdk.repo /etc/yum.repos.d/google-cloud-sdk.repo
 
 # Disable "fastestmirror" plug-in, because it takes a long time.
 RUN sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf && \
-    yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+    #yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+    yum install -y glibc-locale-source glibc-langpack-en \
     yum install -y \
     bind-utils \
     dpkg-dev \
@@ -44,7 +45,7 @@ RUN yum install -y yum-utils && \
     yum clean all
 
 # Ensure that Bazel can use its beloved ISO-8859-1 locale.
-RUN localedef -i en_US -f ISO-8859-1 en_US.ISO-8859-1
+# TODO(fweikert) RUN localedef -i en_US -f ISO-8859-1 en_US.ISO-8859-1
 
 # Bazelisk
 RUN LATEST_BAZELISK=$(curl -sSI https://github.com/bazelbuild/bazelisk/releases/latest | grep -i '^location: ' | sed 's|.*/||' | sed $'s/\r//') && \
