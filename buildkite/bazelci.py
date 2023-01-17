@@ -1646,7 +1646,7 @@ def download_bazelci_agent(dest_dir, version):
 
     name = "bazelci-agent-{}-{}".format(version, postfix)
     url = (
-        "https://github.com/bazelbuild/continuous-integration/releases/download/agent-{}/{}".format(
+        "https://github.com/coeuvre/continuous-integration/releases/download/agent-{}/{}".format(
             version, name
         )
     )
@@ -2202,7 +2202,7 @@ def execute_bazel_coverage(bazel_version, bazel_binary, platform, flags, targets
 
 
 def upload_test_logs_from_bep(bep_file, tmpdir, monitor_flaky_tests):
-    bazelci_agent_binary = download_bazelci_agent(tmpdir, "0.1.3")
+    bazelci_agent_binary = download_bazelci_agent(tmpdir, "0.1.4")
     execute_command(
         [
             bazelci_agent_binary,
